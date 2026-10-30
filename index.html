@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SpaceCat — $SPACECAT</title>
+  <meta name="description" content="SpaceCat ($SPACECAT) — NASA spotted a cosmic cat. The easiest cat runner in the galaxy." />
+  <meta property="og:title" content="SpaceCat — $SPACECAT" />
+  <meta property="og:description" content="Beware… space cat. Cat’s Head Nebula meme. Robinhood meme energy." />
+  <meta property="og:image" content="assets/banner.png" />
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="video-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline poster="assets/banner.png">
+      <source src="assets/hubble-space-cat.mp4" type="video/mp4" />
+    </video>
+    <div class="shade"></div>
+  </div>
+
+  <header class="nav">
+    <div class="brand">
+      <img src="assets/logo.png" alt="SpaceCat logo" />
+      <span>SPACECAT</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#ca">CA</a>
+      <a href="#chart">Chart</a>
+      <a href="#tweet">Tweet</a>
+      <a href="https://x.com/HubertTradez/status/2116186447413903410" target="_blank" rel="noopener">X</a>
+      <a href="https://x.com/NASAHubble/status/2116183343444140287" target="_blank" rel="noopener">Hubble</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-banner">
+        <img src="assets/banner.png" alt="SpaceCat banner — Cat’s Head Nebula + NASA Hubble" />
+      </div>
+      <div class="hero-copy">
+        <div>
+          <div class="badge">Robinhood meme · Cosmic cat</div>
+          <h1>SpaceCat <span>$SPACECAT</span></h1>
+          <p class="lead">
+            NASA just posted a nebula shaped like a cat. 7,500 light-years away.
+            This is the easiest cat runner in the galaxy.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="#ca">Get CA</a>
+            <a class="btn" href="#chart">Live chart</a>
+            <a class="btn" href="https://x.com/HubertTradez/status/2116186447413903410" target="_blank" rel="noopener">Hubert call</a>
+          </div>
+        </div>
+        <aside class="card" id="about">
+          <h2>About</h2>
+          <div class="about">
+            <p>
+              <strong style="color:#fff">SpaceCat</strong> rides the Cat’s Head Nebula —
+              captured by Hubble &amp; Webb for Halloween Eve. Cosmic lore, cat culture, meme speed.
+            </p>
+            <p>
+              Inspired by NASA Hubble’s “Beware… space cat!” and the Hubert call that lit the fuse.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card" id="ca">
+        <h2>Contract address</h2>
+        <div class="ca-box">
+          <code id="ca-text">COMING_SOON</code>
+          <button class="btn" type="button" id="copy-ca">Copy</button>
+        </div>
+        <div class="copy-toast" id="copy-toast">Copied.</div>
+        <p style="margin:0.85rem 0 0;color:var(--muted);font-size:0.9rem;">
+          Paste your live CA into <code>config.js</code> → <code>ca</code> (and set <code>dexscreenerPair</code> for the chart).
+        </p>
+      </div>
+      <div class="card" id="tweet">
+        <h2>Origin tweet</h2>
+        <div class="tweet-embed">
+          <blockquote class="twitter-tweet" data-theme="dark" data-dnt="true">
+            <p lang="en" dir="ltr">NASA JUST POSTED SPACECAT. WHICH IS A NEBULA THAT FORMED IN THE SHAPE OF A CAT!!</p>
+            &mdash; Hubert (@HubertTradez)
+            <a href="https://x.com/HubertTradez/status/2116186447413903410">October 30, 2026</a>
+          </blockquote>
+        </div>
+        <noscript>
+          <div class="tweet-fallback card">
+            <p><a href="https://x.com/HubertTradez/status/2116186447413903410" target="_blank" rel="noopener">View on X</a></p>
+            <img src="assets/hubert-tweet-img.png" alt="Hubert SpaceCat tweet media" />
+          </div>
+        </noscript>
+      </div>
+    </section>
+
+    <section class="card" id="chart" style="margin-bottom:1.5rem;">
+      <h2>DexScreener chart</h2>
+      <div id="chart-root">
+        <div class="chart-placeholder">
+          <div>
+            <strong>Chart ready when CA / pair is set</strong>
+            Set <code>dexscreenerPair</code> in <code>config.js</code>
+            (example: <code>solana/YOUR_PAIR_ADDRESS</code>) and reload.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div>SpaceCat · $SPACECAT · Not financial advice · DYOR</div>
+      <div class="tiny">Video background: NASA Hubble Cat’s Head Nebula · Local assets included</div>
+    </footer>
+  </main>
+
+  <script src="config.js"></script>
+  <script>
+    (function () {
+      var cfg = window.SPACECAT || {};
+      var caEl = document.getElementById("ca-text");
+      var toast = document.getElementById("copy-toast");
+      var ca = (cfg.ca && cfg.ca !== "COMING_SOON") ? cfg.ca : "COMING_SOON";
+      caEl.textContent = ca;
+
+      document.getElementById("copy-ca").addEventListener("click", function () {
+        var text = caEl.textContent;
+        navigator.clipboard.writeText(text).then(function () {
+          toast.textContent = text === "COMING_SOON" ? "Placeholder copied — replace CA in config.js" : "Copied.";
+          toast.classList.add("show");
+          setTimeout(function () { toast.classList.remove("show"); }, 1800);
+        });
+      });
+
+      var root = document.getElementById("chart-root");
+      if (cfg.dexscreenerPair) {
+        var src = "https://dexscreener.com/" + cfg.dexscreenerPair.replace(/^\/+/, "") +
+          "?embed=1&theme=dark&trades=0&info=0";
+        root.innerHTML = '<iframe class="chart-frame" title="DexScreener" src="' + src + '" allow="clipboard-write" allowfullscreen></iframe>';
+      }
+    })();
+  </script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body>
+</html>
