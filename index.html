@@ -29,7 +29,7 @@
       <a href="#ca">CA</a>
       <a href="#chart">Chart</a>
       <a href="#tweet">Tweet</a>
-      <a href="https://x.com/HubertTradez/status/2116186447413903410" target="_blank" rel="noopener">X</a>
+      <a id="nav-x" href="https://x.com/spacecat_robin" target="_blank" rel="noopener">X</a>
       <a href="https://x.com/NASAHubble/status/2116183343444140287" target="_blank" rel="noopener">Hubble</a>
     </nav>
   </header>
@@ -48,9 +48,9 @@
             This is the easiest cat runner in the galaxy.
           </p>
           <div class="cta-row">
-            <a class="btn primary" href="#ca">Get CA</a>
+            <a class="btn primary" id="trade-link" href="https://dexscreener.com/robinhood/0x7b0de6fb2229efb57c74acb0e6a9063feff29852" target="_blank" rel="noopener">Trade</a>
             <a class="btn" href="#chart">Live chart</a>
-            <a class="btn" href="https://x.com/HubertTradez/status/2116186447413903410" target="_blank" rel="noopener">Hubert call</a>
+            <a class="btn" id="follow-x" href="https://x.com/spacecat_robin" target="_blank" rel="noopener">Follow on X</a>
           </div>
         </div>
         <aside class="card" id="about">
@@ -72,12 +72,14 @@
       <div class="card" id="ca">
         <h2>Contract address</h2>
         <div class="ca-box">
-          <code id="ca-text">COMING_SOON</code>
+          <code id="ca-text">0x7b0de6fb2229efb57c74acb0e6a9063feff29852</code>
           <button class="btn" type="button" id="copy-ca">Copy</button>
         </div>
         <div class="copy-toast" id="copy-toast">Copied.</div>
-        <p style="margin:0.85rem 0 0;color:var(--muted);font-size:0.9rem;">
-          Paste your live CA into <code>config.js</code> → <code>ca</code> (and set <code>dexscreenerPair</code> for the chart).
+        <p class="ca-meta">
+          Robinhood Chain
+          · <a id="dex-link" href="https://dexscreener.com/robinhood/0x7b0de6fb2229efb57c74acb0e6a9063feff29852" target="_blank" rel="noopener">DexScreener</a>
+          · <a id="explorer-link" href="https://robinhoodchain.blockscout.com/token/0x7b0De6fB2229EFB57c74acB0e6A9063FEff29852" target="_blank" rel="noopener">Explorer</a>
         </p>
       </div>
       <div class="card" id="tweet">
@@ -123,13 +125,30 @@
       var cfg = window.SPACECAT || {};
       var caEl = document.getElementById("ca-text");
       var toast = document.getElementById("copy-toast");
-      var ca = (cfg.ca && cfg.ca !== "COMING_SOON") ? cfg.ca : "COMING_SOON";
+      var ca = (cfg.ca && cfg.ca !== "0x7b0de6fb2229efb57c74acb0e6a9063feff29852") ? cfg.ca : "0x7b0de6fb2229efb57c74acb0e6a9063feff29852";
       caEl.textContent = ca;
+
+      if (cfg.twitter) {
+        ["nav-x", "follow-x"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.href = cfg.twitter;
+        });
+      }
+      if (cfg.dexscreener) {
+        ["trade-link", "dex-link"].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.href = cfg.dexscreener;
+        });
+      }
+      if (cfg.explorer) {
+        var explorer = document.getElementById("explorer-link");
+        if (explorer) explorer.href = cfg.explorer;
+      }
 
       document.getElementById("copy-ca").addEventListener("click", function () {
         var text = caEl.textContent;
         navigator.clipboard.writeText(text).then(function () {
-          toast.textContent = text === "COMING_SOON" ? "Placeholder copied — replace CA in config.js" : "Copied.";
+          toast.textContent = text === "0x7b0de6fb2229efb57c74acb0e6a9063feff29852" ? "Placeholder copied — replace CA in config.js" : "Copied.";
           toast.classList.add("show");
           setTimeout(function () { toast.classList.remove("show"); }, 1800);
         });
